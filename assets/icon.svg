@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="forge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <linearGradient id="metal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Outer rounded background -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#metal-grad)" stroke="#334155" stroke-width="3" />
+  
+  <!-- Spark/Glow backdrop -->
+  <circle cx="64" cy="64" r="34" fill="url(#forge-grad)" opacity="0.25" filter="url(#glow)" />
+
+  <!-- Code brackets & hammer/spark symbol -->
+  <path d="M42 46 L26 64 L42 82" fill="none" stroke="url(#forge-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M86 46 L102 64 L86 82" fill="none" stroke="url(#forge-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Central Spark / Anvil Core -->
+  <path d="M64 36 L70 56 L88 64 L70 72 L64 92 L58 72 L40 64 L58 56 Z" fill="url(#forge-grad)" />
+</svg>

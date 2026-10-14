@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevForge — The Private, Client-Side Developer Suite</title>
+  <meta name="description" content="A blazing fast, private, all-in-one developer toolbox. cURL converter, JWT inspector, JSON to TypeScript/Python/Go, Crypto & Passwords, Regex, Cron, Diff, and WCAG Color contrast. Zero trackers, 100% client-side.">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="DevForge — Private Developer Toolbox">
+  <meta property="og:description" content="All-in-one developer utilities running entirely in your browser with zero data leakage.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/icon.svg">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button id="mobile-hamburger" class="icon-btn" aria-label="Toggle Navigation" style="display: none;">☰</button>
+        <div class="nav-brand" onclick="window.location.hash='curl'">
+          <img src="assets/icon.svg" alt="DevForge Logo" class="brand-icon">
+          <span>DevForge</span>
+          <span class="brand-badge">Client-Side</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="search-trigger" class="search-trigger" aria-label="Search tools">
+          <span>🔍 Quick Find...</span>
+          <span class="kbd-shortcut">Ctrl K</span>
+        </button>
+
+        <span class="privacy-pill" title="No backend calls. Everything runs inside your browser.">
+          🛡️ Private & Offline
+        </span>
+
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle color theme">☀️</button>
+
+        <a href="https://github.com/BladeMasterLOL/devforge" target="_blank" rel="noopener noreferrer" class="icon-btn" title="View Source on GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Workspace -->
+    <div class="workspace">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-category">Network & APIs</div>
+        <a class="nav-item active" data-tool="curl">
+          <span class="nav-item-icon">⚡</span>
+          <span>cURL Converter</span>
+        </a>
+        <a class="nav-item" data-tool="url">
+          <span class="nav-item-icon">🔗</span>
+          <span>URL & Query Inspector</span>
+        </a>
+
+        <div class="sidebar-category">Security & Auth</div>
+        <a class="nav-item" data-tool="jwt">
+          <span class="nav-item-icon">🔑</span>
+          <span>JWT Inspector</span>
+        </a>
+        <a class="nav-item" data-tool="crypto">
+          <span class="nav-item-icon">🛡️</span>
+          <span>Crypto & Passwords</span>
+        </a>
+
+        <div class="sidebar-category">Data & Formats</div>
+        <a class="nav-item" data-tool="json">
+          <span class="nav-item-icon">{ }</span>
+          <span>JSON Studio & Types</span>
+        </a>
+        <a class="nav-item" data-tool="base64">
+          <span class="nav-item-icon">📦</span>
+          <span>Base64 & Assets</span>
+        </a>
+
+        <div class="sidebar-category">Text & Code</div>
+        <a class="nav-item" data-tool="regex">
+          <span class="nav-item-icon">.*</span>
+          <span>Regex Playground</span>
+        </a>
+        <a class="nav-item" data-tool="diff">
+          <span class="nav-item-icon">⚖️</span>
+          <span>Text Diff & Stats</span>
+        </a>
+
+        <div class="sidebar-category">Design & Automation</div>
+        <a class="nav-item" data-tool="color">
+          <span class="nav-item-icon">🎨</span>
+          <span>Color & WCAG</span>
+        </a>
+        <a class="nav-item" data-tool="cron">
+          <span class="nav-item-icon">⏱️</span>
+          <span>Cron Explainer</span>
+        </a>
+
+        <div style="margin-top: auto; padding: 1rem; border-top: 1px solid var(--border-color); font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+          DevForge v1.0.0<br>
+          Made for developers & open-source
+        </div>
+      </aside>
+
+      <!-- Content Area -->
+      <main class="content-area">
+
+        <!-- 1. cURL Converter -->
+        <section class="tool-view active" id="view-curl">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>⚡ cURL to Code Converter</h1>
+              <p class="tool-description">Convert raw cURL shell commands into native code for Fetch, Axios, Python, Go, and Rust.</p>
+            </div>
+            <div class="tool-actions">
+              <button class="btn btn-secondary" id="curl-sample-btn">Load Sample</button>
+              <button class="btn btn-ghost" id="curl-clear-btn">Clear</button>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">cURL Command Input</span>
+              </div>
+              <textarea id="curl-input" class="textarea" style="height: 320px;" placeholder="Paste curl command here... (e.g. curl -X POST https://api.site.com -H 'Content-Type: application/json' -d '{...}')"></textarea>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="tabs" id="curl-tabs" style="margin-bottom: 0;">
+                  <button class="tab-btn active" data-lang="fetch">Fetch</button>
+                  <button class="tab-btn" data-lang="axios">Axios</button>
+                  <button class="tab-btn" data-lang="python">Python</button>
+                  <button class="tab-btn" data-lang="go">Go</button>
+                  <button class="tab-btn" data-lang="rust">Rust</button>
+                </div>
+                <button class="btn btn-primary btn-sm" id="curl-copy-btn">Copy Code</button>
+              </div>
+              <pre class="code-output" id="curl-output" style="height: 320px;">// Converted code will appear here</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. JWT Inspector -->
+        <section class="tool-view" id="view-jwt">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>🔑 JWT Inspector & Debugger</h1>
+              <p class="tool-description">Inspect token claims and validity client-side. Your secrets are never transmitted anywhere.</p>
+            </div>
+            <div class="tool-actions">
+              <span id="jwt-status-badge" class="badge badge-info">Awaiting input</span>
+              <button class="btn btn-secondary" id="jwt-sample-btn">Load Sample</button>
+              <button class="btn btn-ghost" id="jwt-clear-btn">Clear</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Encoded JWT String</label>
+            <textarea id="jwt-input" class="textarea" style="min-height: 90px;" placeholder="Paste encoded JSON Web Token (header.payload.signature)"></textarea>
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Header (Algorithm & Type)</span>
+                <button class="btn btn-secondary btn-sm" id="jwt-copy-header">Copy</button>
+              </div>
+              <pre class="code-output" id="jwt-header-output">// Header</pre>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Payload (Claims & Expiration)</span>
+                <button class="btn btn-secondary btn-sm" id="jwt-copy-payload">Copy</button>
+              </div>
+              <pre class="code-output" id="jwt-payload-output">// Payload</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. JSON Studio -->
+        <section class="tool-view" id="view-json">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>{ } JSON Studio & Type Generator</h1>
+              <p class="tool-description">Format, minify, validate, and convert JSON structures into TypeScript interfaces, Python Dataclasses, or Go structs.</p>
+            </div>
+            <div class="tool-actions">
+              <span id="json-stats" class="badge badge-info">Empty</span>
+              <button class="btn btn-secondary" id="json-sample-btn">Load Sample</button>
+              <button class="btn btn-ghost" id="json-clear-btn">Clear</button>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Raw JSON Input</span>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <select id="json-indent-select" class="select btn-sm" style="width: auto;">
+                    <option value="2">2 spaces</option>
+                    <option value="4">4 spaces</option>
+                    <option value="tab">Tabs</option>
+                  </select>
+                  <button class="btn btn-primary btn-sm" id="json-format-btn">Format</button>
+                  <button class="btn btn-secondary btn-sm" id="json-minify-btn">Minify</button>
+                </div>
+              </div>
+              <textarea id="json-input" class="textarea" style="height: 360px;" placeholder="Paste JSON here..."></textarea>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="tabs" id="json-tabs" style="margin-bottom: 0;">
+                  <button class="tab-btn active" data-mode="json">Formatted JSON</button>
+                  <button class="tab-btn" data-mode="typescript">TypeScript</button>
+                  <button class="tab-btn" data-mode="python">Python</button>
+                  <button class="tab-btn" data-mode="go">Go Struct</button>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="json-copy-btn">Copy</button>
+              </div>
+              <pre class="code-output" id="json-output" style="height: 360px;">// Output will appear here</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Crypto & Passwords -->
+        <section class="tool-view" id="view-crypto">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>🛡️ Crypto & Password Studio</h1>
+              <p class="tool-description">High performance Web Crypto hashing, HMAC calculation, UUID v4/v7 generation, and cryptographically secure passwords.</p>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <!-- Hashing Card -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Live Hashes (Web Crypto API)</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Input Text</label>
+                <input type="text" id="crypto-hash-input" class="input" value="Hello, DevForge!">
+              </div>
+              <div class="form-group">
+                <label class="form-label">SHA-256</label>
+                <div class="code-output" id="crypto-sha256" style="min-height: 40px; font-size: 0.75rem;">-</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">SHA-512</label>
+                <div class="code-output" id="crypto-sha512" style="min-height: 40px; font-size: 0.75rem;">-</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">MD5</label>
+                <div class="code-output" id="crypto-md5" style="min-height: 40px; font-size: 0.75rem;">-</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">SHA-1</label>
+                <div class="code-output" id="crypto-sha1" style="min-height: 40px; font-size: 0.75rem;">-</div>
+              </div>
+
+              <div style="border-top: 1px solid var(--border-color); padding-top: 0.85rem; margin-top: 0.5rem;">
+                <label class="form-label">HMAC (SHA-256) Secret Key</label>
+                <input type="text" id="crypto-hmac-key" class="input" placeholder="Enter secret key for HMAC...">
+                <label class="form-label" style="margin-top: 0.5rem;">HMAC Result</label>
+                <div class="code-output" id="crypto-hmac-output" style="min-height: 40px; font-size: 0.75rem;">Enter a secret key above to generate HMAC-SHA256</div>
+              </div>
+            </div>
+
+            <!-- UUID & Password Card -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              <!-- Secure Password Generator -->
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-title">Secure Password Generator</span>
+                  <span id="pass-entropy" class="badge badge-success">Entropy</span>
+                </div>
+                <div class="form-group">
+                  <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="pass-output" class="input" readonly style="font-family: var(--font-mono); font-weight: 600;">
+                    <button class="btn btn-primary" id="pass-copy-btn">Copy</button>
+                    <button class="btn btn-secondary" id="pass-gen-btn">↻</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.35rem;">
+                    <span>Length</span>
+                    <strong id="pass-length-val">16</strong>
+                  </div>
+                  <input type="range" id="pass-length" min="8" max="64" value="16" style="width: 100%;">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.8rem;">
+                  <label><input type="checkbox" id="pass-upper" checked> Uppercase (A-Z)</label>
+                  <label><input type="checkbox" id="pass-lower" checked> Lowercase (a-z)</label>
+                  <label><input type="checkbox" id="pass-numbers" checked> Numbers (0-9)</label>
+                  <label><input type="checkbox" id="pass-symbols" checked> Symbols (!@#$)</label>
+                  <label style="grid-column: span 2;"><input type="checkbox" id="pass-ambiguous"> Exclude Ambiguous (l, 1, I, O, 0)</label>
+                </div>
+              </div>
+
+              <!-- UUID Generator -->
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-title">UUID Generator (v4 / v7)</span>
+                  <button class="btn btn-primary btn-sm" id="uuid-gen-btn">Generate</button>
+                </div>
+                <div style="display: flex; gap: 0.75rem; margin-bottom: 0.75rem;">
+                  <div style="flex: 1;">
+                    <label class="form-label">Version</label>
+                    <select id="uuid-version" class="select">
+                      <option value="v4">UUID v4 (Random)</option>
+                      <option value="v7">UUID v7 (Time-Ordered)</option>
+                    </select>
+                  </div>
+                  <div style="flex: 1;">
+                    <label class="form-label">Count (<span id="uuid-count-val">5</span>)</label>
+                    <input type="range" id="uuid-count" min="1" max="20" value="5" style="width: 100%; margin-top: 0.4rem;">
+                  </div>
+                </div>
+                <pre class="code-output" id="uuid-output" style="min-height: 110px;"></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Regex Playground -->
+        <section class="tool-view" id="view-regex">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>.* Regex Playground</h1>
+              <p class="tool-description">Real-time regular expression tester with visual match highlighting, capture groups, and substitution.</p>
+            </div>
+            <div class="tool-actions">
+              <span id="regex-match-count" class="badge badge-info">0 matches</span>
+              <select id="regex-presets" class="select btn-sm" style="width: auto;">
+                <option value="">Presets Cheat Sheet...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <div style="display: flex; gap: 0.75rem; align-items: flex-end;">
+              <div style="flex: 1;">
+                <label class="form-label">Pattern</label>
+                <input type="text" id="regex-pattern" class="input" style="font-family: var(--font-mono);" value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+              </div>
+              <div style="width: 90px;">
+                <label class="form-label">Flags</label>
+                <input type="text" id="regex-flags" class="input" style="font-family: var(--font-mono);" value="gm">
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Test String</span>
+              </div>
+              <textarea id="regex-text" class="textarea" style="height: 200px;">Contact us at team@devforge.io or dev-support@example.org.
+Invalid ones: hello@world, @missing.com</textarea>
+              <div class="form-group" style="margin-top: 0.85rem; margin-bottom: 0;">
+                <label class="form-label">Live Match Highlights</label>
+                <div class="code-output" id="regex-highlights" style="height: 120px; overflow-y: auto;"></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Replacement Preview</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Replace Expression</label>
+                <input type="text" id="regex-replace" class="input" style="font-family: var(--font-mono);" placeholder="e.g. [REDACTED_EMAIL] or $$1">
+              </div>
+              <label class="form-label">Result After Substitution</label>
+              <pre class="code-output" id="regex-replace-output" style="height: 250px;">// Replaced text will appear here</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Base64 & Assets -->
+        <section class="tool-view" id="view-base64">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>📦 Base64 & Asset Studio</h1>
+              <p class="tool-description">Encode and decode UTF-8 text strings, or drag-and-drop images to generate Data URIs and HTML tags.</p>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <!-- Text Card -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Text Encode / Decode (UTF-8)</span>
+                <div style="display: flex; gap: 0.35rem;">
+                  <button class="btn btn-primary btn-sm" id="b64-encode-btn">Encode</button>
+                  <button class="btn btn-secondary btn-sm" id="b64-decode-btn">Decode</button>
+                </div>
+              </div>
+              <textarea id="b64-text-input" class="textarea" style="height: 130px;" placeholder="Enter plain text to encode or Base64 to decode...">DevForge is 100% private & client-side!</textarea>
+              <div class="card-header" style="margin-top: 0.75rem;">
+                <span class="card-title">Output</span>
+                <button class="btn btn-secondary btn-sm" id="b64-text-copy">Copy</button>
+              </div>
+              <textarea id="b64-text-output" class="textarea" style="height: 130px;" readonly></textarea>
+            </div>
+
+            <!-- File / Image Dropzone Card -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Image / File to Data URI</span>
+              </div>
+              <div class="dropzone" id="b64-dropzone">
+                <input type="file" id="b64-file-input" style="display: none;">
+                <p style="font-size: 1.5rem; margin-bottom: 0.5rem;">📁</p>
+                <p style="font-weight: 600;">Drag and drop an image or file here</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Or click to browse from your device</p>
+              </div>
+
+              <div id="b64-asset-preview" style="display: none; margin-top: 1rem;">
+                <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem;" id="b64-asset-info"></div>
+                <img id="b64-img-preview" src="" alt="Preview" style="max-height: 120px; max-width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 0.75rem; display: block; object-fit: contain;">
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <button class="btn btn-primary btn-sm" id="b64-copy-uri">Copy Data URI</button>
+                  <button class="btn btn-secondary btn-sm" id="b64-copy-raw">Copy Raw Base64</button>
+                  <button class="btn btn-secondary btn-sm" id="b64-copy-html">Copy &lt;img&gt; Tag</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Cron Schedule -->
+        <section class="tool-view" id="view-cron">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>⏱️ Cron Schedule Explainer</h1>
+              <p class="tool-description">Translate 5-part cron syntax into human speech and calculate exact upcoming execution timestamps.</p>
+            </div>
+            <div class="tool-actions">
+              <select id="cron-presets" class="select btn-sm" style="width: auto;">
+                <option value="">Quick Presets...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <label class="form-label">5-Field Cron Expression</label>
+            <input type="text" id="cron-input" class="input" style="font-family: var(--font-mono); font-size: 1.15rem; font-weight: 700; letter-spacing: 2px;" value="*/15 * * * *">
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.35rem; padding: 0 4px;">
+              <span>minute (0-59)</span>
+              <span>hour (0-23)</span>
+              <span>day of month (1-31)</span>
+              <span>month (1-12)</span>
+              <span>day of week (0-6)</span>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Human Translation</span>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <span class="form-label">English</span>
+                <div id="cron-desc-en" style="font-size: 1.1rem; font-weight: 600; color: var(--accent-cyan);">-</div>
+              </div>
+              <div>
+                <span class="form-label">Español</span>
+                <div id="cron-desc-es" style="font-size: 1.1rem; font-weight: 600; color: var(--accent-emerald);">-</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Next 5 Scheduled Executions</span>
+              </div>
+              <div id="cron-next-runs"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Diff & Text Stats -->
+        <section class="tool-view" id="view-diff">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>⚖️ Text Diff & Inspector</h1>
+              <p class="tool-description">Compare text differences with line addition/deletion highlighting and live text metrics.</p>
+            </div>
+            <div class="tool-actions">
+              <button class="btn btn-secondary" id="diff-sample-btn">Load Sample</button>
+            </div>
+          </div>
+
+          <div class="tool-grid" style="margin-bottom: 1.25rem;">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Original Text</span>
+                <span id="diff-stats-a" class="badge badge-info">-</span>
+              </div>
+              <textarea id="diff-text-a" class="textarea" style="height: 180px;" placeholder="Original text..."></textarea>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Modified Text</span>
+                <span id="diff-stats-b" class="badge badge-info">-</span>
+              </div>
+              <textarea id="diff-text-b" class="textarea" style="height: 180px;" placeholder="Modified text..."></textarea>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Differences Visualizer</span>
+              <div style="display: flex; gap: 0.5rem; font-size: 0.75rem;">
+                <span class="badge badge-success">+ Addition</span>
+                <span class="badge badge-danger">- Deletion</span>
+              </div>
+            </div>
+            <div class="diff-container" id="diff-output" style="grid-template-columns: 1fr;"></div>
+          </div>
+        </section>
+
+        <!-- 9. Color & WCAG -->
+        <section class="tool-view" id="view-color">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>🎨 Color & WCAG Accessibility Lab</h1>
+              <p class="tool-description">Verify contrast ratios according to WCAG 2.1 AA/AAA accessibility standards and generate palettes.</p>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Color Selectors</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Foreground (Text Color)</label>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <input type="color" id="color-fg-picker" value="#38bdf8" style="width: 44px; height: 38px; border: none; cursor: pointer;">
+                  <input type="text" id="color-fg-input" class="input" value="#38BDF8" style="font-family: var(--font-mono);">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Background Color</label>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <input type="color" id="color-bg-picker" value="#090d16" style="width: 44px; height: 38px; border: none; cursor: pointer;">
+                  <input type="text" id="color-bg-input" class="input" value="#090D16" style="font-family: var(--font-mono);">
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label">Color Shades & Tints (Click to Copy)</label>
+                <div id="color-palette" style="display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px;"></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Contrast Ratio & WCAG 2.1 Compliance</span>
+                <span id="wcag-ratio" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: var(--primary);">-</span>
+              </div>
+
+              <!-- Live text preview box -->
+              <div id="wcag-preview" style="padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 1rem; transition: all 0.15s ease;">
+                <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">Large Heading Text Preview</p>
+                <p style="font-size: 0.875rem;">This is a live preview paragraph to test real-world readability and contrast on buttons, cards, and documents.</p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <div style="background: var(--bg-input); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">WCAG AA (Normal Text, 4.5:1)</div>
+                  <div id="wcag-aa-normal" class="badge badge-info" style="margin-top: 0.35rem;">-</div>
+                </div>
+                <div style="background: var(--bg-input); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">WCAG AA (Large Text, 3:1)</div>
+                  <div id="wcag-aa-large" class="badge badge-info" style="margin-top: 0.35rem;">-</div>
+                </div>
+                <div style="background: var(--bg-input); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">WCAG AAA (Normal Text, 7:1)</div>
+                  <div id="wcag-aaa-normal" class="badge badge-info" style="margin-top: 0.35rem;">-</div>
+                </div>
+                <div style="background: var(--bg-input); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Level Status</div>
+                  <div class="badge badge-success" style="margin-top: 0.35rem;">Accessible</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. URL Inspector -->
+        <section class="tool-view" id="view-url">
+          <div class="tool-header">
+            <div class="tool-title-group">
+              <h1>🔗 URL & Query Inspector</h1>
+              <p class="tool-description">Break down URLs into granular components and interactively modify query parameters.</p>
+            </div>
+            <div class="tool-actions">
+              <button class="btn btn-secondary" id="url-sample-btn">Load Sample</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <label class="form-label">Full URL</label>
+            <input type="text" id="url-input" class="input" style="font-family: var(--font-mono);" placeholder="https://example.com/api?foo=bar">
+          </div>
+
+          <div class="tool-grid">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">URL Breakdown</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem;">
+                  <span style="color: var(--text-muted);">Protocol</span>
+                  <strong id="url-protocol" style="font-family: var(--font-mono);">-</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem;">
+                  <span style="color: var(--text-muted);">Host</span>
+                  <strong id="url-host" style="font-family: var(--font-mono);">-</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem;">
+                  <span style="color: var(--text-muted);">Pathname</span>
+                  <strong id="url-pathname" style="font-family: var(--font-mono);">-</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem;">
+                  <span style="color: var(--text-muted);">Hash</span>
+                  <strong id="url-hash" style="font-family: var(--font-mono);">-</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Query Parameters Editor</span>
+                <button class="btn btn-primary btn-sm" id="url-add-param">+ Add Param</button>
+              </div>
+              <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                  <tr style="font-size: 0.7rem; color: var(--text-muted); text-align: left;">
+                    <th style="padding: 4px;">KEY</th>
+                    <th style="padding: 4px;">VALUE</th>
+                    <th style="padding: 4px;"></th>
+                  </tr>
+                </thead>
+                <tbody id="url-params-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Command Palette Modal -->
+  <div class="modal-backdrop" id="command-modal">
+    <div class="command-modal">
+      <div class="modal-search-box">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="modal-search-input" id="command-search" placeholder="Type a tool name or keyword (e.g. token, password, curl)..." autocomplete="off">
+        <span class="kbd-shortcut">ESC</span>
+      </div>
+      <div class="modal-results" id="command-results"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Script -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
