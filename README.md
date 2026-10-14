@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://blademasterlol.github.io/devforge/"><img alt="Open DevForge" src="https://img.shields.io/badge/Open-DevForge-6366f1?style=for-the-badge&logo=github&logoColor=white" /></a>
+  <a href="https://blademxgit.github.io/devforge/"><img alt="Open DevForge" src="https://img.shields.io/badge/Open-DevForge-6366f1?style=for-the-badge&logo=github&logoColor=white" /></a>
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-38bdf8?style=for-the-badge" /></a>
   <img alt="Privacy 100% Client-Side" src="https://img.shields.io/badge/Privacy-100%25_Client--Side-10b981?style=for-the-badge" />
 </p>
@@ -46,7 +46,7 @@
 
 ### 🚀 Live Demo
 
-Use the live app on GitHub Pages: **[https://blademasterlol.github.io/devforge/](https://blademasterlol.github.io/devforge/)**
+Use the live app on GitHub Pages: **[https://blademxgit.github.io/devforge/](https://blademxgit.github.io/devforge/)**
 
 ### 💻 Run Locally
 
@@ -54,7 +54,7 @@ Serve the repository with any local static server:
 
 ```bash
 # Clone the repository
-git clone https://github.com/BladeMasterLOL/devforge.git
+git clone https://github.com/BladeMXGit/devforge.git
 cd devforge
 
 # Using Python
@@ -93,13 +93,13 @@ python -m http.server 8080
 
 ### 🚀 Demo en Vivo
 
-Puedes usar la versión online desplegada en GitHub Pages: **[https://blademasterlol.github.io/devforge/](https://blademasterlol.github.io/devforge/)**
+Puedes usar la versión online desplegada en GitHub Pages: **[https://blademxgit.github.io/devforge/](https://blademxgit.github.io/devforge/)**
 
 ### 💻 Ejecutar en Local
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/BladeMasterLOL/devforge.git
+git clone https://github.com/BladeMXGit/devforge.git
 cd devforge
 
 # Ejecutar con Python
